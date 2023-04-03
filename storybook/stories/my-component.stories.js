@@ -1,11 +1,24 @@
 export default {
-  title: 'components/JS/my-component',
-  component: 'my-component',
+  title: "components/JS/my-component",
+  component: "my-component",
 };
 
-export const Primary = {
+export const Button5 = {
   args: {
     primary: true,
-    label: 'Button',
+    label: "Button",
   },
+};
+
+export const Button6 = {
+  args: {
+    primary: true,
+    label: "Button",
+  },
+
+  loaders: [
+    async () => {
+      localStorage.setItem("title", "Button6");
+    },
+  ],
 };

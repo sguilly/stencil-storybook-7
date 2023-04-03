@@ -6,15 +6,37 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface CustomChart {
+        "chartTitle": string;
+    }
+    interface CustomMap {
+        "version": any;
+    }
     interface MyComponent {
         "label": string;
     }
+}
+export interface CustomMapCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCustomMapElement;
 }
 export interface MyComponentCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMyComponentElement;
 }
 declare global {
+    interface HTMLCustomChartElement extends Components.CustomChart, HTMLStencilElement {
+    }
+    var HTMLCustomChartElement: {
+        prototype: HTMLCustomChartElement;
+        new (): HTMLCustomChartElement;
+    };
+    interface HTMLCustomMapElement extends Components.CustomMap, HTMLStencilElement {
+    }
+    var HTMLCustomMapElement: {
+        prototype: HTMLCustomMapElement;
+        new (): HTMLCustomMapElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -22,15 +44,26 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "custom-chart": HTMLCustomChartElement;
+        "custom-map": HTMLCustomMapElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface CustomChart {
+        "chartTitle"?: string;
+    }
+    interface CustomMap {
+        "onMapLoaded"?: (event: CustomMapCustomEvent<any>) => void;
+        "version"?: any;
+    }
     interface MyComponent {
         "label"?: string;
         "onDidLoad"?: (event: MyComponentCustomEvent<any>) => void;
     }
     interface IntrinsicElements {
+        "custom-chart": CustomChart;
+        "custom-map": CustomMap;
         "my-component": MyComponent;
     }
 }
@@ -38,6 +71,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "custom-chart": LocalJSX.CustomChart & JSXBase.HTMLAttributes<HTMLCustomChartElement>;
+            "custom-map": LocalJSX.CustomMap & JSXBase.HTMLAttributes<HTMLCustomMapElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
