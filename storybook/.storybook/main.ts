@@ -2,16 +2,16 @@
 
 const config = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-mdx-gfm'],
   framework: {
     name: '@storybook/web-components-webpack5',
-    options: {},
+    options: {}
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: 'tag'
   },
   features: {
-    babelModeV7: true,
-  },
+    babelModeV7: true
+  }
 };
 export default config;
