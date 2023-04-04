@@ -1,8 +1,16 @@
-import { Component, Prop, h, State, Event, EventEmitter } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  h,
+  State,
+  Event,
+  EventEmitter,
+  Listen,
+} from "@stencil/core";
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
+  tag: "my-component",
+  styleUrl: "my-component.css",
 })
 export class MyComponent {
   @Prop() label: string;
@@ -13,6 +21,11 @@ export class MyComponent {
 
   componentDidLoad() {
     this.didLoad.emit(true);
+  }
+
+  @Listen("mapLoaded", { target: "window" })
+  onMapLoadedHandler(_old, _new) {
+    console.log("my-component onMapLoadedHandler", _old, _new);
   }
 
   render() {
